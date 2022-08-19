@@ -1,6 +1,6 @@
 *,*::before,*::after{
     box-sizing: border-box;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family:'Verdana';
 }
 
 body{
@@ -8,4 +8,26 @@ padding: 0;
 margin: 0;
 background: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
 ;
+}
+
+.grid-calc{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh; /*esto hace que llene el 100% de la altura todo el tiempo*/
+    grid-template-columns: repeat(4, 100px); /*tendremos 4 columnas de 100 px c/u* */
+    grid-template-columns: minmax(120,auto) /*minimo tendra 120px pero maximo lo que necesite*/repeat(5, 100px); /*luego se repite 5 veces el valor de 120px*/
+}
+
+/*Luego se seleccionan todos los botones dentro del grid like this: */
+.grid-calc>button{
+    cursor: pointer;
+    font-size: 2rem;
+    border: 1.5px solid white;
+    outline: none;
+    background-color: rgba(255, 255,255 ,0.5);
+}
+
+.grid-calc>button:hover{
+    background-color: rgba(255, 255,255 ,0.9);;
 }
