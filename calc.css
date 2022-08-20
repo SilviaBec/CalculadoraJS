@@ -16,12 +16,13 @@ background: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
     align-content: center;
     min-height: 100vh; /*esto hace que llene el 100% de la altura todo el tiempo*/
     grid-template-columns: repeat(4, 100px); /*tendremos 4 columnas de 100 px c/u* */
-    grid-template-columns: minmax(120,auto) /*minimo tendra 120px pero maximo lo que necesite*/repeat(5, 100px); /*luego se repite 5 veces el valor de 120px*/
+    grid-template-rows: minmax(120px,auto) /*minimo tendra 120px pero maximo lo que necesite*/repeat(5, 100px); /*luego se repite 5 veces el valor de 120px*/
 }
 
 /*Luego se seleccionan todos los botones dentro del grid like this: */
 .grid-calc>button{
     cursor: pointer;
+
     font-size: 2rem;
     border: 1.5px solid white;
     outline: none;
@@ -30,4 +31,30 @@ background: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
 
 .grid-calc>button:hover{
     background-color: rgba(255, 255,255 ,0.9);;
+}
+
+.span-2{
+    grid-column: span 2;
+}
+
+.salidas{
+    grid-column: 1/-1;
+    background-color: rgba(148, 90, 224, 0.55);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 10px;
+    word-wrap: break-word;
+    word-break: break-all;
+
+}
+.salidas .operacion-anterior{
+    color: rgba(255,255,255,.75);
+    font-size: 1.5rem;
+}
+
+.salidas .operacion-actual{
+    color: white;
+    font-size: 1.5rem;
 }
