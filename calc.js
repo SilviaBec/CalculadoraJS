@@ -8,7 +8,37 @@ class Calculadora {
         //en la clase calculadora
         this.operandoAnteriorTextElement = operandoAnteriorTextElement
         this.operandoActualTextElement = operandoActualTextElement
+        this.limpiar()
+    }
+    //3.Ahora creamos funciones para cada operación, borrar, clear all etc
 
+
+    limpiar(){
+        this.operacionActual =''
+        this.operacionAnterior =''
+        this.operacion = undefined
+
+    }
+
+    borrar(){
+
+    }
+
+    //Esta funcion hace que el numero al que le damos click pase a la pantalla (num) que numero seleccionaremos?
+    anadirNum(num){
+        this. operacionActual = num
+    }
+    ///(operacion) * - ó el + ¿Que operación seleccionaremos?
+    elegir(operacion){
+
+    }
+
+    ejecutar(){
+
+    }
+
+    actualizarPantalla(){
+        this.operandoActualTextElement.innerText = this.operacionActual
     }
 }
 
@@ -27,4 +57,14 @@ const botonBorrar = document.querySelector('[data-borrar]')
 const botonAC = document.querySelector('[data-borrar-todo]')
 const operandoAnteriorTextElement = document.querySelector('[data-anterior]')
 const operandoActualTextElement = document.querySelector('[data-actual]')
+
+
+const calculadora = new Calculadora(operandoAnteriorTextElement, operandoActualTextElement)
+
+botonesNumero.forEach(button => {
+    button.addEventListener('click', () => {
+        calculadora.anadirNum(button.innerText)
+        calculadora.actualizarPantalla()
+    })
+})
 
