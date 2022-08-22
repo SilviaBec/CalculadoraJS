@@ -26,11 +26,16 @@ class Calculadora {
 
     //Esta funcion hace que el numero al que le damos click pase a la pantalla (num) que numero seleccionaremos?
     anadirNum(num){
-        this. operacionActual = num
+        //Para que no me deje poner varios puntos seguidos en la pantalla sino solo uno
+        if(num==='.' && this.operacionActual.includes('.')) return
+        //Se pasa a string para que concatene y los numeros no se sumen sino que se añadan a la fila en la pantalla
+        this.operacionActual = this.operacionActual.toString()+num.toString()
     }
     ///(operacion) * - ó el + ¿Que operación seleccionaremos?
-    elegir(operacion){
-
+    elegirOp(operacion){
+        this.operacion =operacion
+        this.operacionAnterior = this.operacionActual
+        this.operacionActual=''
     }
 
     ejecutar(){
@@ -67,4 +72,14 @@ botonesNumero.forEach(button => {
         calculadora.actualizarPantalla()
     })
 })
+
+
+botonesOperacion.forEach(button => {
+    button.addEventListener('click', () => {
+        calculadora.elegirOp(button.innerText)
+        calculadora.actualizarPantalla()
+    })
+})
+
+
 
