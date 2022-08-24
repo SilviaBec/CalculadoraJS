@@ -28,22 +28,35 @@ class Calculadora {
     anadirNum(num){
         //Para que no me deje poner varios puntos seguidos en la pantalla sino solo uno
         if(num==='.' && this.operacionActual.includes('.')) return
+
         //Se pasa a string para que concatene y los numeros no se sumen sino que se añadan a la fila en la pantalla
         this.operacionActual = this.operacionActual.toString()+num.toString()
     }
     ///(operacion) * - ó el + ¿Que operación seleccionaremos?
     elegirOp(operacion){
+        if(this.operacionActual === '') return
+        if(this.operacionAnterior !== ''){
+            this.ejecutar()
+        }
         this.operacion =operacion
         this.operacionAnterior = this.operacionActual
         this.operacionActual=''
     }
 
     ejecutar(){
+        //Esta variable será el resultado de la función ejecutar
+        let ejecutar
+        const ant = parseFloat(this.operacionAnterior)
+        const act = parseFloat(this.operacionActual)
 
     }
 
     actualizarPantalla(){
         this.operandoActualTextElement.innerText = this.operacionActual
+
+        //Con esta parte el numero escrito pasa a la sección de arriba de mi pantalla de salida
+        //como operando anterior, despues de que selecciono una operacion (*,/,- etc)
+        this.operandoAnteriorTextElement.innerText = this.operacionAnterior
     }
 }
 
@@ -79,6 +92,11 @@ botonesOperacion.forEach(button => {
         calculadora.elegirOp(button.innerText)
         calculadora.actualizarPantalla()
     })
+})
+
+botonIgual.addEventListener('click', button => {
+    calculadora.ejecutar()
+    calculadora.actualizarPantalla()
 })
 
 
