@@ -45,9 +45,33 @@ class Calculadora {
 
     ejecutar(){
         //Esta variable será el resultado de la función ejecutar
-        let ejecutar
+        let ejecucion
+        //Acá abajo convertimos el String a un numero
         const ant = parseFloat(this.operacionAnterior)
         const act = parseFloat(this.operacionActual)
+
+        //Este condicional evita que el usuario ponga un operador seguido de otro cuando debe poner un numero
+        //NaN not a number, si no es un numero ...
+        if(isNaN(ant) || isNaN(act)) return
+        switch (this.operacion){
+            case '+': 
+            ejecucion = anterior+actual
+            break
+            case '-': 
+            ejecucion = anterior-actual
+            break
+            case '*': 
+            ejecucion = anterior*actual
+            break
+            case '÷': 
+            ejecucion = anterior/actual
+            break
+            default:
+            return 
+        }
+this.operacionActual = ejecucion
+this.operacion = undefined
+this.operacionAnterior=''
 
     }
 
@@ -96,6 +120,11 @@ botonesOperacion.forEach(button => {
 
 botonIgual.addEventListener('click', button => {
     calculadora.ejecutar()
+    calculadora.actualizarPantalla()
+})
+
+botonAC.addEventListener('click', button => {
+    calculadora.limpiar()
     calculadora.actualizarPantalla()
 })
 
