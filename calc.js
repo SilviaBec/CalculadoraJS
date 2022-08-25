@@ -21,6 +21,7 @@ class Calculadora {
     }
 
     borrar(){
+        this.operacionActual = this.operacionActual.toString().slice(0,-1)
 
     }
 
@@ -48,23 +49,23 @@ class Calculadora {
         let ejecucion
         //Acá abajo convertimos el String a un numero
         const ant = parseFloat(this.operacionAnterior)
-        const act = parseFloat(this.operacionActual)
+        const actual = parseFloat(this.operacionActual)
 
         //Este condicional evita que el usuario ponga un operador seguido de otro cuando debe poner un numero
         //NaN not a number, si no es un numero ...
-        if(isNaN(ant) || isNaN(act)) return
+        if(isNaN(ant) || isNaN(actual)) return
         switch (this.operacion){
             case '+': 
-            ejecucion = anterior+actual
+            ejecucion = ant+actual
             break
             case '-': 
-            ejecucion = anterior-actual
+            ejecucion = ant-actual
             break
             case '*': 
-            ejecucion = anterior*actual
+            ejecucion = ant*actual
             break
             case '÷': 
-            ejecucion = anterior/actual
+            ejecucion = ant/actual
             break
             default:
             return 
@@ -77,10 +78,14 @@ this.operacionAnterior=''
 
     actualizarPantalla(){
         this.operandoActualTextElement.innerText = this.operacionActual
-
+        if (this.operacion != null){
+        this.operandoAnteriorTextElement.innerText = 
+        //para que cuando estoy escribiendo una operacion en la parte de arriba se queden el 1er operando y el simbolo de la operacion que deseo
+        `${this.operacionAnterior} ${this.operacion}`   
+        }
         //Con esta parte el numero escrito pasa a la sección de arriba de mi pantalla de salida
         //como operando anterior, despues de que selecciono una operacion (*,/,- etc)
-        this.operandoAnteriorTextElement.innerText = this.operacionAnterior
+        
     }
 }
 
@@ -125,6 +130,10 @@ botonIgual.addEventListener('click', button => {
 
 botonAC.addEventListener('click', button => {
     calculadora.limpiar()
+    calculadora.actualizarPantalla()
+})
+botonBorrar.addEventListener('click', button => {
+    calculadora.borrar()
     calculadora.actualizarPantalla()
 })
 
