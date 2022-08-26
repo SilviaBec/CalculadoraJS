@@ -76,12 +76,37 @@ this.operacionAnterior=''
 
     }
 
+    obtenerNumeroPantalla(num){
+        const numString =num.toString()
+        const digInt = parseFloat(numString.split('.')[0])
+        const decimal= numString.split('.')[1]
+        let intPantalla
+        const numFloat= parseFloat(num)
+        if (isNaN(digInt)) {
+            intPantalla =''
+        } else{
+            intPantalla = digInt.toLocaleString('es', {
+                fraccionMaxDigitos:0
+            })
+        }
+        
+if(decimal != null){
+    return `${intPantalla}.${decimal}`
+} else {
+    return intPantalla
+}
+    }
+
+
     actualizarPantalla(){
-        this.operandoActualTextElement.innerText = this.operacionActual
+        this.operandoActualTextElement.innerText = 
+        this.obtenerNumeroPantalla(this.operacionActual)
         if (this.operacion != null){
         this.operandoAnteriorTextElement.innerText = 
         //para que cuando estoy escribiendo una operacion en la parte de arriba se queden el 1er operando y el simbolo de la operacion que deseo
-        `${this.operacionAnterior} ${this.operacion}`   
+        `${this.obtenerNumeroPantalla(this.operacionAnterior)} ${this.operacion}`   
+        }  else{
+            this.operandoAnteriorTextElement.innerText =''
         }
         //Con esta parte el numero escrito pasa a la sección de arriba de mi pantalla de salida
         //como operando anterior, despues de que selecciono una operacion (*,/,- etc)
